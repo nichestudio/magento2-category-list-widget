@@ -36,7 +36,7 @@
                     <option name="default" value="false" selected="true">
                         <label translate="true">No</label>
                     </option>
-                    <option name="descriptions" value="false">
+                    <option name="descriptions" value="true">
                         <label translate="true">Yes</label>
                     </option>
                 </options>

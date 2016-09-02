@@ -2,36 +2,57 @@
 $categories = $this->getCategoryCollection();
 $categoryHelper = $this->getCategoryHelper();
 $canshowImg = $this->canShowImage();
+$canShowDescription = $this->canShowDescription();
 $title = $block->getTitle() ? __($block->getTitle()) : 'Categories';
 ?>
-<?php if ($title):?>
-<div class="block-title">
-	<strong><?php /* @escapeNotVerified */ echo $title; ?></strong>
+<div class="category-block">
+	<?php if ($title):?>
+	<div class="block-title">
+		<strong><?php /* @escapeNotVerified */ echo $title; ?></strong>
+	</div>
+	<?php endif ?>
+
+	<?php if($canShowDescription):?>		
+		<div class="block-content catalog-category-description">
+	<?php else:?>			
+		<div class="block-content catalog-category">
+	<?php endif;?>
+		
+	<?php
+	//echo get_class($categories);
+	foreach($categories as $category):
+			//var_dump(get_class_methods($category));
+			$cat = $this->getCategorymodel($category->getId());
+			// var_dump($cat->getImageUrl());
+			//var_dump($cat);
+			// var_dump($cat->debug());die;
+			?>
+			<?php if($canShowDescription):?>		
+				<a href="<?php echo $cat->getUrl(); ?>" class="category-description">
+					<?php if($canshowImg && $cat->getImageUrl()):?>
+						<div class="catthumb-description" style="background: linear-gradient(rgba(29, 18, 22, 0.5), rgba(29, 18, 22, 0.5)), url(<?php echo $cat->getImageUrl(); ?>); background-repeat: no-repeat, no-repeat; background-position: center top, center top; background-size: cover;">
+							<h2><?php echo $cat->getName(); ?></h2>
+							<div class="cat-description" style="clear:both;"><?php echo $cat->getDescription(); ?></div>
+						</div>
+					<?php else:?>
+						<span class="cat-title"><?php echo $cat->getName(); ?></span>
+						<span class="cat-description"><?php echo $cat->getDescription(); ?></span>
+					<?php endif;?>
+				</a>
+			<?php else:?>			
+				<a href="<?php echo $cat->getUrl(); ?>" class="category">
+					<?php if($canshowImg && $cat->getImageUrl()):?>
+						<div class="catthumb-<?php echo $cat->getName(); ?>">
+							<?php echo $cat->getName(); ?>
+						</div>
+					<?php else:?>
+					<span class="cat-title"><?php echo $cat->getName(); ?></span>
+					<?php endif;?>
+				</a>
+			<?php endif;?>
+
+			<?php
+	endforeach;
+	?>
+	</div>
 </div>
-<?php endif ?>
-<div class="block-content catalog-category">
-<?php
-//echo get_class($categories);
-foreach($categories as $category):
-        var_dump(get_class_methods($category));
-        $cat = $this->getCategorymodel($category->getId());
-        // var_dump($cat->getImageUrl());
-        var_dump($cat);
-        // var_dump($cat->debug());die;
-        ?>
-        <span class="category">
-        	<a href="<?php echo $cat->getUrl(); ?>">
-        		<?php if($canshowImg && $cat->getImageUrl()):?>
-        			<img src="<?= $cat->getImageUrl(); ?>" alt="" width="<?=$this->getImagewidth();?>" height="<?=$this->getImageheight()?>"/>
-        		<?php else:?>
-        		<span class="cat-title"><?php echo $cat->getName(); ?></span>
-        		<?php endif;?>
-        	</a>
-        		<?php if($canshowDescription):?>
-        		        <span class="cat-description"><?php echo $cat->getDescription(); ?></span>
-        		<?php endif;?>
-        </span>
-        <?php
-endforeach;
-?>
-</div
