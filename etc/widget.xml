@@ -30,10 +30,17 @@
 				<label translate="true">Specific Parent Category ID</label>
 				<description translate="true">Default Category of Current Store will be used in case of Blank</description>
 			</parameter>
-			<parameter name="descriptions" xsi:type="text"  visible="true" sort_order="10">
-				<label translate="true">Show Category Descriptions</label>
-				<description translate="true">Show the category description under the title</description>
-			</parameter>
+			<parameter name="descriptions" xsi:type="select" required="true" visible="true">
+                	<label translate="true">Show Category Descriptions</label>
+                <options>
+                    <option name="default" value="false" selected="true">
+                        <label translate="true">No</label>
+                    </option>
+                    <option name="descriptions" value="false">
+                        <label translate="true">Yes</label>
+                    </option>
+                </options>
+            </parameter>
 		</parameters>
 	</widget>
 </widgets>

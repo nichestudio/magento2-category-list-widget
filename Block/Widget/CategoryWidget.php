@@ -119,7 +119,7 @@ class CategoryWidget extends \Magento\Framework\View\Element\Template implements
     }
 
     public function canShowDescription(){
-    	if($this->getData('description') == 'true')
+    	if($this->getData('descriptions') == 'descriptions')
     		return true;
     	else
     	    return false;
