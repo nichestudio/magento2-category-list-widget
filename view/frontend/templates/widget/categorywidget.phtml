@@ -13,9 +13,10 @@ $title = $block->getTitle() ? __($block->getTitle()) : 'Categories';
 <?php
 //echo get_class($categories);
 foreach($categories as $category):
-        //var_dump(get_class_methods($category));
+        var_dump(get_class_methods($category));
         $cat = $this->getCategorymodel($category->getId());
         // var_dump($cat->getImageUrl());
+        var_dump($cat);
         // var_dump($cat->debug());die;
         ?>
         <span class="category">
@@ -26,6 +27,9 @@ foreach($categories as $category):
         		<span class="cat-title"><?php echo $cat->getName(); ?></span>
         		<?php endif;?>
         	</a>
+        		<?php if($canshowDescription):?>
+        		        <span class="cat-description"><?php echo $cat->getDescription(); ?></span>
+        		<?php endif;?>
         </span>
         <?php
 endforeach;

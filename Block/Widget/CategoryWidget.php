@@ -117,4 +117,13 @@ class CategoryWidget extends \Magento\Framework\View\Element\Template implements
     	elseif($this->getData('image') == 'no-image')
     	return false;
     }
+
+    public function canShowDescription(){
+    	if($this->getData('description') == 'true')
+    		return true;
+    	else
+    	    return false;
+    }
+
+
 }
